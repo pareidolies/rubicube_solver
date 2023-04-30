@@ -14,3 +14,13 @@ cube.horizontal_twist(1, 0)
 
 cube.print()
 print(cube.is_solved())
+
+cube.vertical_twist(1, 1)
+
+cube.print()
+print(cube.is_solved())
+
+cube.vertical_twist(1, 0)
+
+cube.print()
+print(cube.is_solved())

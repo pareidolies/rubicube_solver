@@ -15,6 +15,14 @@ def check_face(face):
                     return False
         return True
 
+def assign_column(arr1, arr2, col):
+    for i in range(len(arr1)):
+        arr1[i][col] = arr2[i][col]
+
+def copy_2d_array(arr):
+    """Create a copy of a 2D array."""
+    return [row.copy() for row in arr]
+
 class RubiksCube:
 
     def __init__(self):
@@ -26,11 +34,17 @@ class RubiksCube:
         self.bottom = fill('y')
 
     def print(self):
+        print(" TOP")
         print(self.top)
+        print(" LEFT")
         print(self.left)
+        print(" FRONT")
         print(self.front)
+        print(" RIGHT")
         print(self.right)
+        print(" BACK")
         print(self.back)
+        print(" BOTTOM")
         print(self.bottom)
 
     def check_face(self, face):
@@ -69,9 +83,26 @@ class RubiksCube:
             self.left[row] = tmp_front
             self.back[row] = tmp_left
 
-    #def vertical_twist(self, column, direction):
+    def vertical_twist(self, col, direction):
     # column : integer representing which column you would like to twist
     # direction : boolean representing if you want to twist up or down [down = 0, up = 1]
+        if direction == 0:
+            tmp_bottom = copy_2d_array(self.bottom)
+            assign_column(self.bottom, self.front, col)
+            tmp_back = copy_2d_array(self.back)
+            assign_column(self.back, tmp_bottom, col)
+            tmp_top = copy_2d_array(self.top)
+            assign_column(self.top, tmp_back, col)
+            assign_column(self.front, tmp_top, col)
+
+        if direction == 1:
+            tmp_top = copy_2d_array(self.top)
+            assign_column(self.top, self.front, col)
+            tmp_back = copy_2d_array(self.back)
+            assign_column(self.back, tmp_top, col)
+            tmp_bottom = copy_2d_array(self.bottom)
+            assign_column(self.bottom, tmp_back, col)
+            assign_column(self.front, tmp_bottom, col)
 
     #def side_twist(self, column, direction):
     # column : integer representing which column you would like to twist
