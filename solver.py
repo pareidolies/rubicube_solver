@@ -1,5 +1,3 @@
-# state="rrrwrwrgryrywwwwrwbrbggggggwowyyyyyygygbbbbbbooobooooo"
-
 # colours = ['w', 'o', 'g', 'r', 'b', 'y'],
 
 def fill(color):
@@ -49,19 +47,37 @@ class RubiksCube:
             return True
         return False
 
-    #def shuffle() :
-
-    #def horizontal_twist(my_cube, row, direction) :
+    
+    def horizontal_twist(self, row, direction):
     # row : integer representing which row you would like to twist
     # direction : boolean representing if you want to twist right or left [left = 0, right = 1]
+        if direction == 1:
+            tmp_right = self.right[row]
+            self.right[row] = self.front[row]
+            tmp_back = self.back[row]
+            self.back[row] = tmp_right
+            tmp_left = self.left[row]
+            self.left[row] = tmp_back
+            self.front[row] = tmp_left
 
-    #def vertical_twist(my_cube, column, direction) :
+        if direction == 0:
+            tmp_right = self.right[row]
+            self.right[row] = self.back[row]
+            tmp_front = self.front[row]
+            self.front[row] = tmp_right
+            tmp_left = self.left[row]
+            self.left[row] = tmp_front
+            self.back[row] = tmp_left
+
+    #def vertical_twist(self, column, direction):
     # column : integer representing which column you would like to twist
     # direction : boolean representing if you want to twist up or down [down = 0, up = 1]
 
-    #def side_twist(my_cube, column, direction) :
+    #def side_twist(self, column, direction):
     # column : integer representing which column you would like to twist
     # direction : boolean representing if you want to twist up or down [down = 0, up = 1]
+
+    #def shuffle():
 
     # step 1
     # check
