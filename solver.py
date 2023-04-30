@@ -20,8 +20,15 @@ def assign_column(arr1, arr2, col):
         arr1[i][col] = arr2[i][col]
 
 def copy_2d_array(arr):
-    """Create a copy of a 2D array."""
     return [row.copy() for row in arr]
+
+def assign_row_to_col(arr1, arr2, id):
+    for i in range(3):
+        arr1[i][id] = arr2[id][i]
+
+def assign_col_to_row(arr1, arr2, id):
+    for i in range(3):
+        arr1[id][i] = arr2[i][id]
 
 class RubiksCube:
 
@@ -104,9 +111,26 @@ class RubiksCube:
             assign_column(self.bottom, tmp_back, col)
             assign_column(self.front, tmp_bottom, col)
 
-    #def side_twist(self, column, direction):
+    def side_twist(self, col, direction):
     # column : integer representing which column you would like to twist
-    # direction : boolean representing if you want to twist up or down [down = 0, up = 1]
+    # direction : boolean representing if you want to twist up or down [right = 0, left = 1]
+        if direction == 0:
+            tmp_right = copy_2d_array(self.right)
+            assign_row_to_col(self.right, self.top, col)
+            tmp_bottom = copy_2d_array(self.bottom)
+            assign_col_to_row(self.bottom, tmp_right ,col)
+            tmp_left = copy_2d_array(self.left)
+            assign_row_to_col(self.left, tmp_bottom, col)
+            assign_col_to_row(self.top, tmp_left, col)
+        
+        if direction == 1:
+            tmp_left = copy_2d_array(self.left)
+            assign_row_to_col(self.left, self.top, col)
+            tmp_bottom = copy_2d_array(self.bottom)
+            assign_col_to_row(self.bottom, tmp_left, col)
+            tmp_right = copy_2d_array(self.right)
+            assign_row_to_col(self.right, tmp_bottom, col)
+            assign_col_to_row(self.top, tmp_right, col)
 
     #def shuffle():
 
