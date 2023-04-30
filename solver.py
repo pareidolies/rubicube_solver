@@ -1,4 +1,16 @@
+from random import randint, choice
+
+ANSI_PURPLE = "\x1b[95m"
+ANSI_BLUE = "\x1b[94m"
+ANSI_YELLOW	= "\x1b[93m"
+ANSI_RED = "\x1b[91m"
+ANSI_GREEN = "\x1b[92m"
+ANSI_CYAN = "\x1b[96m"
+ANSI_RESET = "\x1b[0m"
+
 # colours = ['w', 'o', 'g', 'r', 'b', 'y'],
+
+#UTILS
 
 def fill(color):
         face = [[None for j in range(3)] for i in range(3)]
@@ -30,6 +42,8 @@ def assign_col_to_row(arr1, arr2, id):
     for i in range(3):
         arr1[id][i] = arr2[i][id]
 
+#RUBIKSCUBE
+
 class RubiksCube:
 
     def __init__(self):
@@ -41,17 +55,17 @@ class RubiksCube:
         self.bottom = fill('y')
 
     def print(self):
-        print(" TOP")
+        print(ANSI_PURPLE + " TOP" + ANSI_RESET)
         print(self.top)
-        print(" LEFT")
+        print(ANSI_PURPLE + " LEFT" + ANSI_RESET)
         print(self.left)
-        print(" FRONT")
+        print(ANSI_PURPLE + " FRONT" + ANSI_RESET)
         print(self.front)
-        print(" RIGHT")
+        print(ANSI_PURPLE + " RIGHT" + ANSI_RESET)
         print(self.right)
-        print(" BACK")
+        print(ANSI_PURPLE + " BACK" + ANSI_RESET)
         print(self.back)
-        print(" BOTTOM")
+        print(ANSI_PURPLE + " BOTTOM" + ANSI_RESET)
         print(self.bottom)
 
     def check_face(self, face):
@@ -132,11 +146,28 @@ class RubiksCube:
             assign_row_to_col(self.right, tmp_bottom, col)
             assign_col_to_row(self.top, tmp_right, col)
 
-    #def shuffle():
+    def shuffle(self):
+        moves = randint(5, 100)
+        actions = [
+            ('h', 0),
+            ('h', 1),
+            ('v', 0),
+            ('v', 1),
+            ('s', 0),
+            ('s', 1)
+        ]
+        for i in range(moves):
+            a = choice(actions) #action
+            j = randint(0, 2) #col or row
+            if a[0] == 'h':
+                self.horizontal_twist(j, a[1])
+            elif a[0] == 'v':
+                self.vertical_twist(j, a[1])
+            elif a[0] == 's':
+                self.side_twist(j, a[1])
 
     # step 1
     # check
-
 
     # step 2
     # check
