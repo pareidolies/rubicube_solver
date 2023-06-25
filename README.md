@@ -1,1 +1,3 @@
-# rubicube_solver
+# rubicube
+
+[🚧 refactoring & solving part in progress]
